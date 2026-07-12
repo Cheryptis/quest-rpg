@@ -1,9 +1,13 @@
+import Header from "./components/Header";
+import PlayerCard from "./components/PlayerCard";
+import QuestCard from "./components/QuestCard";
+
 function App() {
   return (
     <div>
-      <h1>Quest RPG</h1>
-      <p>Willkommen zu deinem Abenteuer!</p>
-      <button>Quest starten</button>
+      <Header />
+      <PlayerCard />
+      <QuestCard />
     </div>
   );
 }
