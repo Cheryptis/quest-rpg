@@ -1,7 +1,7 @@
 import "../styles/player-card.css";
 
-function PlayerCard(props) {
-    const { level, xp, streak } = props;
+function PlayerCard({player}) {
+    const { level, xp, streak } = player;
     return (
         <section className="player-card">
             <h2>Level {level}</h2>
