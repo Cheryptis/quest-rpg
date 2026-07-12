@@ -1,6 +1,8 @@
+import "../styles/header.css";
+
 function Header() {
     return (
-        <header>
+        <header className="header">
             <h1>Quest RPG</h1>
         </header>
     );

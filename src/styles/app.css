@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    background: var(--background);
+}
+
+.app {
+    max-width: 500px;
+    margin: 40px auto;
+}

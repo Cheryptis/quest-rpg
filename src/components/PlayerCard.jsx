@@ -1,11 +1,14 @@
-function PlayerCard() {
+import "../styles/player-card.css";
+
+function PlayerCard(props) {
+    const { level, xp, streak } = props;
     return (
-        <section>
-            <h2>Level 1</h2>
+        <section className="player-card">
+            <h2>Level {level}</h2>
 
-            <p>XP: 0 / 100</p>
+            <p>XP: {xp} / 100</p>
 
-            <p>🔥 Streak: 0</p>
+            <p>🔥 Streak: {streak}</p>
         </section>
     );
 }
