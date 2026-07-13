@@ -24,7 +24,7 @@ function App() {
 
   const player = {
     level: 1,
-    xp,
+    xp: xp,
     streak: 0,
   };
 
