@@ -35,15 +35,15 @@ function App() {
   const [xp, setXp] = useState(0);
   const [currentQuestIndex, setCurrentQuestIndex] = useState(0);
   const [skills, setSkillXp] = useState(0)
-  
-  function completeQuest(reward) {
-    setXp(currentXp => currentXp + reward);
-    setCurrentQuestIndex(currentQuestIndex => (currentQuestIndex + 1) % quests.length);
-  };
 
   function getQuestXp(attributeRewards) {
     return Object.values(attributeRewards).reduce((total, value) => total + value, 0)
   };
+
+  function completeQuest(reward) {
+      setXp(currentXp => currentXp + getQuestXp(reward));
+      setCurrentQuestIndex(currentQuestIndex => (currentQuestIndex + 1) % quests.length);
+    };
 
   const player = {
     level: 1,

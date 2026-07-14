@@ -10,7 +10,7 @@ function QuestCard({quest, completeQuest, getQuestXp}) {
 
             <p>XP: {getQuestXp(attributeRewards)}</p>
 
-            <button onClick={() => completeQuest(getQuestXp(attributeRewards))}>Quest erledigt</button>
+            <button onClick={() => completeQuest(attributeRewards)}>Quest erledigt</button>
         </section>
     );
 }
