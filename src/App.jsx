@@ -27,22 +27,22 @@ const quests = [
   },
 ];
 
-
-
-
 function App() {
 
   const [xp, setXp] = useState(0);
   const [currentQuestIndex, setCurrentQuestIndex] = useState(0);
-  const [attrbiutes, setAttributeXp] = useState({
+  const [attributes, setAttributeXp] = useState({
       fitness: {
         xp: 0,
+        priority: 3,
       },
       social: {
         xp: 0,
+        priority: 2,
       },
       knowledge: {
         xp: 0,
+        priority: 1,
       }})
 
   function getQuestXp(attributeRewards) {
@@ -61,21 +61,34 @@ function App() {
       });
     };
 
-  const player = {
-    level: 1,
-    xp: xp,
-    streak: 0,
-    attributes: {
-      fitness: {
-        xp: 0,
-      },
-      social: {
-        xp: 0,
-      },
-      knowledge: {
-        xp: 0,
-      }
+  function getTotalXp(attributes) {
+    return Object.values(attributes).reduce((total,value) => total + value.xp, 0)
+  };
+
+  function getLevelInfo(totalXp) {
+    let xpNeeded = 100;
+    let level = 1;
+    let currentXp = totalXp;
+    while (currentXp >= xpNeeded) {
+      currentXp -= xpNeeded;
+      level += 1
+      xpNeeded = xpNeeded + (10 * level)
     }
+    return {
+      level: level,
+      currentXp: currentXp,
+      xpNeeded: xpNeeded
+    }
+  };
+
+  const totalXp = getTotalXp(attributes);
+  const levelInfo = getLevelInfo(totalXp);
+  const player = {
+    level: levelInfo.level,
+    xp: levelInfo.currentXp,
+    xpNeeded: levelInfo.xpNeeded,
+    streak: 0,
+    attributes: attributes
   };
 
   return (
