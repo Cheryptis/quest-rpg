@@ -1,6 +1,6 @@
 import "../styles/quest-card.css";
 
-function QuestCard({quest, completeQuest, getQuestXp}) {
+function QuestCard({quest, completeQuest, getRewardXp}) {
     const { quest_now, attributeRewards } = quest;
     return (
         <section className="quest-card">
@@ -8,7 +8,7 @@ function QuestCard({quest, completeQuest, getQuestXp}) {
 
             <p>{quest_now}</p>
 
-            <p>XP: {getQuestXp(attributeRewards)}</p>
+            <p>XP: {getRewardXp(attributeRewards)}</p>
 
             <button onClick={() => completeQuest(attributeRewards)}>Quest erledigt</button>
         </section>

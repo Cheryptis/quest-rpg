@@ -29,9 +29,8 @@ const quests = [
 
 function App() {
 
-  const [xp, setXp] = useState(0);
   const [currentQuestIndex, setCurrentQuestIndex] = useState(0);
-  const [attributes, setAttributeXp] = useState({
+  const [attributes, setAttributes] = useState({
       fitness: {
         xp: 0,
         priority: 3,
@@ -45,18 +44,23 @@ function App() {
         priority: 1,
       }})
 
-  function getQuestXp(attributeRewards) {
+  function getRewardXp(attributeRewards) {
     return Object.values(attributeRewards).reduce((total, value) => total + value, 0)
   };
 
   function completeQuest(reward) {
-      setXp(currentXp => currentXp + getQuestXp(reward));
+    console.log("Reward:", reward);
       setCurrentQuestIndex(currentQuestIndex => (currentQuestIndex + 1) % quests.length);
-      setAttributeXp(attributes => {
+      setAttributes(currentAttributes => {
+        console.log("Vorher:", attributes);
         const newAttributes = { ...attributes };
         Object.entries(reward).forEach(([attribute, attributeReward]) => {
-          newAttributes[attribute].xp += attributeReward
+          newAttributes[attribute] = {
+            ...newAttributes[attribute],
+            xp: newAttributes[attribute].xp + attributeReward
+          };
         });
+        console.log("Nachher:", newAttributes);
         return newAttributes;
       });
     };
@@ -82,6 +86,7 @@ function App() {
   };
 
   const totalXp = getTotalXp(attributes);
+  console.log("Total XP:", totalXp);
   const levelInfo = getLevelInfo(totalXp);
   const player = {
     level: levelInfo.level,
@@ -98,7 +103,7 @@ function App() {
       <QuestCard
         quest={quests[currentQuestIndex]}
         completeQuest={completeQuest}
-        getQuestXp={getQuestXp}
+        getRewardXp={getRewardXp}
       />
     </div>
   );
