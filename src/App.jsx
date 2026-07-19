@@ -86,7 +86,6 @@ function App() {
   };
 
   const totalXp = getTotalXp(attributes);
-  console.log("Total XP:", totalXp);
   const levelInfo = getLevelInfo(totalXp);
   const player = {
     level: levelInfo.level,
@@ -99,7 +98,9 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <PlayerCard player={player}/>
+      <PlayerCard 
+        player={player}
+        getLevelInfo={getLevelInfo}/>
       <QuestCard
         quest={quests[currentQuestIndex]}
         completeQuest={completeQuest}

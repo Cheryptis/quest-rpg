@@ -1,6 +1,6 @@
 import "../styles/player-card.css";
 
-const attributeInfo = {
+const attributeDesign = {
   fitness: {
     name: "Fitness",
     icon: "💪"
@@ -15,7 +15,9 @@ const attributeInfo = {
   },
 };
 
-function PlayerCard({player}) {
+
+
+function PlayerCard({player, getLevelInfo}) {
     const { level, xp, xpNeeded, streak, attributes } = player;
     return (
         <section className="player-card">
@@ -25,12 +27,15 @@ function PlayerCard({player}) {
 
             <p>🔥 Streak: {streak}</p>
             
-            {
-                Object.entries(attributes).map(([attribute, attributeData]) => (
-                    <p key={attribute}>
-                            {attributeInfo[attribute].icon} {attributeInfo[attribute].name}: {attributeData.xp} XP
-                    </p>
-                ))
+            { 
+                Object.entries(attributes).map(([attribute, attributeData]) => {
+                    const attributeInfo = getLevelInfo(attributeData.xp);
+                    return (
+                      <p key={attribute}>
+                        {attributeDesign[attribute].icon} {attributeDesign[attribute].name}: Level {attributeInfo.level} ({attributeInfo.currentXp}/{attributeInfo.xpNeeded} XP)
+                      </p>
+                    );
+                })
             }
         </section>
     );
