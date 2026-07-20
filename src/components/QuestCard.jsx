@@ -1,12 +1,12 @@
 import "../styles/quest-card.css";
 
 function QuestCard({quest, completeQuest, getRewardXp}) {
-    const { quest_now, attributeRewards } = quest;
+    const { title, attributeRewards } = quest;
     return (
         <section className="quest-card">
             <h2>📜 Heutige Quest</h2>
 
-            <p>{quest_now}</p>
+            <p>{title}</p>
 
             <p>XP: {getRewardXp(attributeRewards)}</p>
 

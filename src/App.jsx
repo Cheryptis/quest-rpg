@@ -3,29 +3,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import PlayerCard from "./components/PlayerCard";
 import QuestCard from "./components/QuestCard";
-
-
-
-const quests = [
-  {
-    quest_now: "Gehe 20 Minuten spazieren",
-    attributeRewards: {
-      fitness: 20
-    }
-  },
-  {
-    quest_now: "Mache 10 Liegestütze",
-    attributeRewards: {
-      fitness: 15
-    }
-  },
-  {
-    quest_now: "Rufe einen Freund an",
-    attributeRewards: {
-      social: 25
-    }
-  },
-];
+import quests from "./data/quests";
 
 function App() {
 
@@ -42,8 +20,33 @@ function App() {
       knowledge: {
         xp: 0,
         priority: 1,
-      }})
-
+      },
+      creativity: {
+        xp: 0,
+        priority: 1,
+      },
+      lifestyle: {
+        xp: 0,
+        priority: 1,
+      },
+      comfortZone: {
+        xp: 0,
+        priority: 1,
+      },
+      practical: {
+        xp: 0,
+        priority: 1,
+      },
+      mental: {
+        xp: 0,
+        priority: 1,
+      },
+      random: {
+        xp: 0,
+        priority: 1,
+      },
+    })
+  
   function getRewardXp(attributeRewards) {
     return Object.values(attributeRewards).reduce((total, value) => total + value, 0)
   };
@@ -94,7 +97,6 @@ function App() {
     streak: 0,
     attributes: attributes
   };
-
   return (
     <div className="app">
       <Header />

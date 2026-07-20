@@ -1,19 +1,5 @@
 import "../styles/player-card.css";
-
-const attributeDesign = {
-  fitness: {
-    name: "Fitness",
-    icon: "💪"
-  },
-  social: {
-    name: "Social",
-    icon: "🤝"
-  },
-  knowledge: {
-    name:"Knowledge",
-    icon: "🧠"
-  },
-};
+import attributeDesign from "../data/attributeDesign";
 
 
 
@@ -26,10 +12,11 @@ function PlayerCard({player, getLevelInfo}) {
             <p>XP: {xp} / {xpNeeded}</p>
 
             <p>🔥 Streak: {streak}</p>
-            
+
             { 
                 Object.entries(attributes).map(([attribute, attributeData]) => {
                     const attributeInfo = getLevelInfo(attributeData.xp);
+                    console.log(attribute);
                     return (
                       <p key={attribute}>
                         {attributeDesign[attribute].icon} {attributeDesign[attribute].name}: Level {attributeInfo.level} ({attributeInfo.currentXp}/{attributeInfo.xpNeeded} XP)
