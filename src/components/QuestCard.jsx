@@ -1,6 +1,7 @@
 import "../styles/quest-card.css";
+import { getRewardXp } from "../utils/quest"
 
-function QuestCard({quest, completeQuest, getRewardXp}) {
+function QuestCard({quest, completeQuest}) {
     const { title, attributeRewards } = quest;
     return (
         <section className="quest-card">
