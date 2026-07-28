@@ -17,7 +17,7 @@ const defaultAttributes = {
       },
       lifestyle: {
         xp: 0,
-        priority: 0,
+        priority: 2,
       },
       comfortZone: {
         xp: 0,

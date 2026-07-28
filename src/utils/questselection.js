@@ -39,6 +39,7 @@ function attributeWeight(attributes, idealRatio, actualRatio) {
     Object.entries(attributes).forEach(([attribute, attributeData]) => {
         finalWeight[attribute] = idealRatio[attribute] + (balanceFactors[attributeData.priority] * (idealRatio[attribute] - actualRatio[attribute]));
     });
+    console.log(finalWeight) -m
     return finalWeight;
 };
 
