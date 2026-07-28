@@ -2,6 +2,7 @@ import "../styles/quest-card.css";
 import { getRewardXp } from "../utils/quest"
 
 function QuestCard({quest, completeQuest}) {
+    console.log(quest)
     const { title, attributeRewards } = quest;
     return (
         <section className="quest-card">

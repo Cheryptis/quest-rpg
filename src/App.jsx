@@ -11,6 +11,7 @@ import defaultAttributes from "./data/defaultAttributes"
 
 import { getLevelInfo } from "./utils/player"
 import { getTotalXp } from "./utils/player"
+import {pickQuest } from "./utils/questselection"
 
 
 
@@ -19,6 +20,7 @@ function App() {
 
   const [currentQuestIndex, setCurrentQuestIndex] = useState(0);
   const [attributes, setAttributes] = useState(defaultAttributes)
+  const [activeQuest, setActiveQuest] = useState(() => pickQuest(attributes));
 
   function completeQuest(reward) {
     console.log("Reward:", reward);
@@ -32,9 +34,12 @@ function App() {
             xp: newAttributes[attribute].xp + attributeReward
           };
         });
-        console.log("Nachher:", newAttributes);
+        console.log(newAttributes);
+        setActiveQuest(activeQuest => pickQuest(newAttributes));
+        console.log(activeQuest)
         return newAttributes;
       });
+      
   };
 
   const totalXp = getTotalXp(attributes);
@@ -46,6 +51,8 @@ function App() {
     streak: 0,
     attributes: attributes
   };
+  console.log(activeQuest)
+  console.log(pickQuest(attributes));
   return (
     <div className="app">
       <Header />
@@ -53,7 +60,7 @@ function App() {
         player={player}
         getLevelInfo={getLevelInfo}/>
       <QuestCard
-        quest={quests[currentQuestIndex]}
+        quest={activeQuest}
         completeQuest={completeQuest}
       />
     </div>

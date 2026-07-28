@@ -16,7 +16,6 @@ function PlayerCard({player, getLevelInfo}) {
             { 
                 Object.entries(attributes).map(([attribute, attributeData]) => {
                     const attributeInfo = getLevelInfo(attributeData.xp);
-                    console.log(attribute);
                     return (
                       <p key={attribute}>
                         {attributeDesign[attribute].icon} {attributeDesign[attribute].name}: Level {attributeInfo.level} ({attributeInfo.currentXp}/{attributeInfo.xpNeeded} XP)

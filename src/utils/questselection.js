@@ -6,22 +6,32 @@ function idealAttributeRatio(attributes) {
     Object.entries(attributes).forEach(([attribute, attributeData]) => {
         idealRatios[attribute] = (attributeData.priority / totalPriority) * 100;
     });
+    console.log(idealRatios);
     return idealRatios;
 };
 
 function actualAttributeRatio(attributes) {
-    const totalXp = Object.values(attributes).reduce((total,value) => total + value.xp, 0)
-    const actualRatios = {}
-    Object.entries(attributes).forEach(([attribute, attributeData]) => {
-        actualRatios[attribute] = (attributeData.xp / totalXp) * 100;
-    });
-    return actualRatios
+    const totalXp = Object.values(attributes).reduce((total,value) => total + value.xp, 0);
+    const actualRatios = {};
+    if (totalXp === 0) {
+        Object.entries(attributes).forEach(([attribute]) => {
+            actualRatios[attribute] = 0;
+        })
+    } else {
+        Object.entries(attributes).forEach(([attribute, attributeData]) => {
+            actualRatios[attribute] = (attributeData.xp / totalXp) * 100;
+        });
+    }
+    console.log(actualRatios);
+    return actualRatios;
 };
 
+
 const balanceFactors = {
-  1: 0.8,
-  2: 0.5,
-  3: 0.3
+    0: 0.0,
+    1: 0.8,
+    2: 0.5,
+    3: 0.3
 };
 
 function attributeWeight(attributes, idealRatio, actualRatio) {
@@ -41,11 +51,13 @@ function pickAttribute(weights) {
         if (random <= currentWeight) {
             return attribute
         };
+    console.log(weights);
     };
 };
 
 function pickQuestByAttribute(quests, selectedAttribute) {
-    const possibleQuests = quests.filter((quests) => quest.attributeRewards[selectedAttribute]);
+
+    const possibleQuests = quests.filter(quest => selectedAttribute in quest.attributeRewards);
     const randomIndex = Math.floor(Math.random() * possibleQuests.length);
     return possibleQuests[randomIndex];
 };
