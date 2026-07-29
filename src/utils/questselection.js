@@ -39,7 +39,7 @@ function attributeWeight(attributes, idealRatio, actualRatio) {
     Object.entries(attributes).forEach(([attribute, attributeData]) => {
         finalWeight[attribute] = idealRatio[attribute] + (balanceFactors[attributeData.priority] * (idealRatio[attribute] - actualRatio[attribute]));
     });
-    console.log(finalWeight) -m
+    console.log(finalWeight)
     return finalWeight;
 };
 
@@ -59,6 +59,9 @@ function pickAttribute(weights) {
 function pickQuestByAttribute(quests, selectedAttribute) {
 
     const possibleQuests = quests.filter(quest => selectedAttribute in quest.attributeRewards);
+    if (possibleQuests.length === 0) {
+        return quests.find(quest => quest.fallback === true);
+    }
     const randomIndex = Math.floor(Math.random() * possibleQuests.length);
     return possibleQuests[randomIndex];
 };

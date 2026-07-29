@@ -64,6 +64,15 @@ const quests = [
     tags: ["friend"]
   },
   {
+    id: "fallback001",
+    quest_now: "Suche dir selbst eine kleine Aufgabe aus",
+    attributeRewards: { random: 10 },
+    difficulty: 1,
+    maxTime: 0,
+    tags: [],
+    fallback: true
+  },
+  {
     id: "gratitude_journal",
     title: "Schreibe drei Dinge auf, für die du dankbar bist",
     attributeRewards: { mental: 15 },
