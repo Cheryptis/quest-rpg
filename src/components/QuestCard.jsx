@@ -3,12 +3,12 @@ import { getRewardXp } from "../utils/quest"
 
 function QuestCard({quest, completeQuest}) {
     console.log(quest)
-    const { title, attributeRewards } = quest;
+    const { title, id, attributeRewards } = quest;
     return (
         <section className="quest-card">
             <h2>📜 Heutige Quest</h2>
 
-            <p>{title}</p>
+            <p>{title} ({id})</p>
 
             <p>XP: {getRewardXp(attributeRewards)}</p>
 

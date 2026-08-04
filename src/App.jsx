@@ -23,24 +23,26 @@ function App() {
   const [attributes, setAttributes] = useState(defaultAttributes)
   const [activeQuest, setActiveQuest] = useState(() => pickQuest(attributes));
   const [currentScreen, setCurrentScreen] = useState("game");
+  const [streak, setStreak] = useState(0);
 
   function completeQuest(reward) {
     console.log("Reward:", reward);
-      setCurrentQuestIndex(currentQuestIndex => (currentQuestIndex + 1) % quests.length);
-      setAttributes(currentAttributes => {
-        console.log("Vorher:", attributes);
-        const newAttributes = { ...attributes };
-        Object.entries(reward).forEach(([attribute, attributeReward]) => {
-          newAttributes[attribute] = {
-            ...newAttributes[attribute],
-            xp: newAttributes[attribute].xp + attributeReward
-          };
-        });
-        console.log(newAttributes);
-        setActiveQuest(activeQuest => pickQuest(newAttributes));
-        console.log(activeQuest)
-        return newAttributes;
+    setStreak(currentStreak => currentStreak + 1);
+    setCurrentQuestIndex(currentQuestIndex => (currentQuestIndex + 1) % quests.length);
+    setAttributes(currentAttributes => {
+      console.log("Vorher:", attributes);
+      const newAttributes = { ...attributes };
+      Object.entries(reward).forEach(([attribute, attributeReward]) => {
+        newAttributes[attribute] = {
+          ...newAttributes[attribute],
+          xp: newAttributes[attribute].xp + attributeReward
+        };
       });
+      console.log(newAttributes);
+      setActiveQuest(activeQuest => pickQuest(newAttributes));
+      console.log(activeQuest)
+      return newAttributes;
+    });
       
   };
 
@@ -50,9 +52,10 @@ function App() {
     level: levelInfo.level,
     xp: levelInfo.currentXp,
     xpNeeded: levelInfo.xpNeeded,
-    streak: 0,
+    streak: streak,
     attributes: attributes
   };
+  console.log(streak)
   console.log(activeQuest)
   console.log(pickQuest(attributes));
   return (

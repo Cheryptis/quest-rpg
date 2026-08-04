@@ -59,6 +59,9 @@ function pickAttribute(weights) {
 function pickQuestByAttribute(quests, selectedAttribute) {
 
     const possibleQuests = quests.filter(quest => selectedAttribute in quest.attributeRewards);
+    if (possibleQuests.length === 0) {
+        return quests.find(quest => quest.fallback === true);
+    }
     const randomIndex = Math.floor(Math.random() * possibleQuests.length);
     return possibleQuests[randomIndex];
 };

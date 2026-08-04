@@ -11,6 +11,13 @@ function PlayerCard({player, getLevelInfo}) {
 
             <p>XP: {xp} / {xpNeeded}</p>
 
+            <div className="xp-bar">
+                <div
+                    className="xp-fill"
+                    style={{ width: `${(xp / xpNeeded) * 100}%` }}
+                ></div>
+            </div>
+
             <p>🔥 Streak: {streak}</p>
 
             { 
