@@ -5,13 +5,14 @@ import { useState } from "react";
 import Header from "./components/Header";
 import PlayerCard from "./components/PlayerCard";
 import QuestCard from "./components/QuestCard";
+import SettingsScreen from "./components/SettingsScreen";
 
 import quests from "./data/quests";
-import defaultAttributes from "./data/defaultAttributes"
+import defaultAttributes from "./data/defaultAttributes";
 
-import { getLevelInfo } from "./utils/player"
-import { getTotalXp } from "./utils/player"
-import {pickQuest } from "./utils/questselection"
+import { getLevelInfo } from "./utils/player";
+import { getTotalXp } from "./utils/player";
+import { pickQuest } from "./utils/questselection";
 
 
 
@@ -21,6 +22,7 @@ function App() {
   const [currentQuestIndex, setCurrentQuestIndex] = useState(0);
   const [attributes, setAttributes] = useState(defaultAttributes)
   const [activeQuest, setActiveQuest] = useState(() => pickQuest(attributes));
+  const [currentScreen, setCurrentScreen] = useState("game");
 
   function completeQuest(reward) {
     console.log("Reward:", reward);
@@ -56,13 +58,28 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <PlayerCard 
+      {currentScreen === "game" && (
+        <>
+        <button onClick={() => setCurrentScreen("settings")}>
+          ⚙️ Einstellungen
+        </button>
+        <PlayerCard 
         player={player}
         getLevelInfo={getLevelInfo}/>
-      <QuestCard
+        <QuestCard
         quest={activeQuest}
-        completeQuest={completeQuest}
-      />
+        completeQuest={completeQuest}/>
+        </>
+      )}
+      
+      {currentScreen === "settings" && (
+      <>
+      <button onClick={() => setCurrentScreen("game")}>
+          🎮 Spiel
+      </button>
+      <SettingsScreen></SettingsScreen>
+      </>
+      )}
     </div>
   );
 }
